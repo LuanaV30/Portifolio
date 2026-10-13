@@ -3,7 +3,6 @@ const $$ = (s, p=document) => [...p.querySelectorAll(s)];
 
 lucide.createIcons();
 
-// Theme
 const savedTheme = localStorage.getItem("luana-theme");
 if (savedTheme === "light") document.body.classList.add("light");
 
@@ -12,11 +11,9 @@ $("#themeSwitch").addEventListener("click", () => {
   localStorage.setItem("luana-theme", document.body.classList.contains("light") ? "light" : "dark");
 });
 
-// Mobile menu
 $("#mobileMenu").addEventListener("click", () => $("#sidebar").classList.toggle("open"));
 $$(".nav-link").forEach(link => link.addEventListener("click", () => $("#sidebar").classList.remove("open")));
 
-// Scroll reveal
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) entry.target.classList.add("visible");
@@ -24,7 +21,6 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: .12 });
 $$(".reveal").forEach(el => observer.observe(el));
 
-// Active nav
 const sections = $$("section[id]");
 const navLinks = $$(".nav-link");
 window.addEventListener("scroll", () => {
@@ -36,14 +32,12 @@ window.addEventListener("scroll", () => {
   navLinks.forEach(link => link.classList.toggle("active", link.getAttribute("href") === `#${current}`));
 }, {passive:true});
 
-// Cursor glow
 const glow = $(".cursor-glow");
 window.addEventListener("pointermove", e => {
   glow.style.left = `${e.clientX}px`;
   glow.style.top = `${e.clientY}px`;
 }, {passive:true});
 
-// Floating particles
 const particleBox = $("#particles");
 for (let i = 0; i < 48; i++) {
   const p = document.createElement("span");
@@ -55,7 +49,6 @@ for (let i = 0; i < 48; i++) {
   particleBox.appendChild(p);
 }
 
-// 3D tilt cards
 $$(".tilt").forEach(card => {
   card.addEventListener("pointermove", e => {
     if (window.innerWidth < 800) return;
@@ -67,7 +60,6 @@ $$(".tilt").forEach(card => {
   card.addEventListener("pointerleave", () => card.style.transform = "");
 });
 
-// Magnetic buttons
 $$(".magnetic").forEach(btn => {
   btn.addEventListener("pointermove", e => {
     if (window.innerWidth < 800) return;
@@ -107,13 +99,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const overlay = document.querySelector("#contactOverlay");
     const form = document.querySelector("#contactForm");
 
-    // Confere se os elementos existem
     if (!modal || !botao || !fechar || !overlay || !form) {
         console.error("Contato: confira os IDs e classes do HTML.");
         return;
     }
 
-    // Abre a janela
     function abrirModal() {
         modal.classList.add("open");
         modal.setAttribute("aria-hidden", "false");
@@ -121,7 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
         fechar.focus();
     }
 
-    // Fecha a janela
     function fecharModal() {
         modal.classList.remove("open");
         modal.setAttribute("aria-hidden", "true");
@@ -138,7 +127,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Prepara uma mensagem para o aplicativo de e-mail
     form.addEventListener("submit", (event) => {
         event.preventDefault();
 
